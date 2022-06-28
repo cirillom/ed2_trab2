@@ -5,14 +5,11 @@
 #include "timeControl.h"
 #include "utils.h"
 
-int ex1d(){
+int ex1d(int n_testes, int* entradas_original, int* consultas_original){
     const int N = 50000;
     const int index_size = 10000;
     unsigned encontrados = 0;
 
-    int* entradas = ler_inteiros("inteiros_entrada.txt", N);
-    int* consultas = ler_inteiros("inteiros_busca.txt", N);
-    
     // ordenar entrada
 
     // criar tabela de indice
