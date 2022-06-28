@@ -5,11 +5,14 @@
 #include "timeControl.h"
 #include "utils.h"
 
+int elementsLookeds = 0;
 int buscaSequencial(int* arr, int n, int x){
     int i;
-    for (i = 0; i < n; i++)
+    for (i = 0; i < n; i++){
+        elementsLookeds++;
         if (arr[i] == x)
             return TRUE;
+    }
     return FALSE;
 }
 
@@ -38,5 +41,6 @@ int ex1a(int n_testes){
         printf("Itens encontrados: %d\n", encontrados);
         encontrados = 0;
     }
+    printf("Elements looked: %d\n", elementsLookeds);
     return 0;
 }
