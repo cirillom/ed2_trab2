@@ -1,6 +1,7 @@
 
 CC ?= gcc
 CFLAGS += -Wall -Wextra -Wpedantic
+LDFLAGS += -lm
 
 EXECUTABLE ?= build/main
 TEST_CFILES = $(wildcard src/*_teste.c)
@@ -35,12 +36,12 @@ debug: $(EXECUTABLE) test
 
 $(EXECUTABLE): $(OFILES)
 	@mkdir -p build
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 
 build/%: $(filter-out build/main.o, $(OFILES)) build/%_teste.o
 	@mkdir -p build
-	$(CC) $(LDFLAGS) -o $@ $^	
+	$(CC) -o $@ $^ $(LDFLAGS) 
 
 
 build/%.o: src/%.c

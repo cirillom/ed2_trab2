@@ -1,6 +1,6 @@
 {
     "files.associations": {
         "timecontrol.h": "c",
-        "math.h": "c"
+        "utils.h": "c"
     }
 }
