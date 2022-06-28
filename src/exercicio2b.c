@@ -5,6 +5,8 @@
 #include <string.h>
 #include <math.h>
 
+#include "timeControl.h"
+
 // Definição das variaveis que controlam a medição de tempo
 clock_t _ini, _fim;
 
@@ -41,17 +43,6 @@ string* ler_strings(const char * arquivo, const int n){
     return strings;
 }
 
-void inicia_tempo(){
-    srand(time(NULL));
-    _ini = clock();
-}
-
-double finaliza_tempo(){
-    _fim = clock();
-    return ((double) (_fim - _ini)) / CLOCKS_PER_SEC;
-}
-
-
 unsigned h_div(unsigned x, unsigned i, unsigned B){
     return ((x % B) + i) % B;
 }
@@ -76,18 +67,18 @@ int main(int argc, char const *argv[]){
     // cria tabela hash com hash por hash duplo
 
     // inserção dos dados na tabela hash
-    inicia_tempo();
+    clock_t _ini = inicia_tempo();
     for (int i = 0; i < N; i++) {
         // inserir insercoes[i] na tabela hash
     }
-    double tempo_insercao = finaliza_tempo();
+    double tempo_insercao = finaliza_tempo(_ini);
 
     // busca dos dados na tabela hash
-    inicia_tempo();
+    clock_t _ini = inicia_tempo();
     for (int i = 0; i < M; i++) {
         // buscar consultas[i] na tabela hash
     }
-    double tempo_busca = finaliza_tempo();
+    double tempo_busca = finaliza_tempo(_ini);
 
 
     printf("Colisões na inserção: %d\n", colisoes);

@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-// Definição das variaveis que controlam a medição de tempo
-clock_t _ini, _fim;
+#include "timeControl.h"
 
 // Definição do tipo booleano
 unsigned char typedef bool;
@@ -23,16 +22,6 @@ int* ler_inteiros(const char * arquivo, const int n){
     return inteiros;
 }
 
-void inicia_tempo(){
-    srand(time(NULL));
-    _ini = clock();
-}
-
-double finaliza_tempo(){
-    _fim = clock();
-    return ((double) (_fim - _ini)) / CLOCKS_PER_SEC;
-}
-
 int main(int argc, char const *argv[]){
     const int N = 50000;
     unsigned encontrados = 0;
@@ -41,11 +30,11 @@ int main(int argc, char const *argv[]){
     int* consultas = ler_inteiros("inteiros_busca.txt", N);
 
     // realiza busca sequencial
-    inicia_tempo();
+    clock_t _ini = inicia_tempo();
     for (int i = 0; i < N; i++) {
         // buscar o elemento consultas[i] na entrada
     }
-    double tempo_busca = finaliza_tempo();
+    double tempo_busca = finaliza_tempo(_ini);
 
     printf("Tempo de busca    :\t%fs\n", tempo_busca);
     printf("Itens encontrados :\t%d\n", encontrados);

@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "timeControl.h"
+
 // Definição das variaveis que controlam a medição de tempo
 clock_t _ini, _fim;
 
@@ -23,16 +25,6 @@ int* ler_inteiros(const char * arquivo, const int n){
     return inteiros;
 }
 
-void inicia_tempo(){
-    srand(time(NULL));
-    _ini = clock();
-}
-
-double finaliza_tempo(){
-    _fim = clock();
-    return ((double) (_fim - _ini)) / CLOCKS_PER_SEC;
-}
-
 int main(int argc, char const *argv[]){
     const int N = 50000;
     const int index_size = 10000;
@@ -46,11 +38,11 @@ int main(int argc, char const *argv[]){
     // criar tabela de indice
 
     // realizar consultas na tabela de indices 
-    inicia_tempo();
+    clock_t _ini = inicia_tempo();
     for (int i = 0; i < N; i++) {
         // buscar o elemento consultas[i] na entrada
     }
-    double tempo_busca = finaliza_tempo();
+    double tempo_busca = finaliza_tempo(_ini);
 
     printf("Tempo de busca    :\t%fs\n", tempo_busca);
     printf("Itens encontrados :\t%d\n", encontrados);
