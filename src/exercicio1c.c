@@ -15,30 +15,26 @@ int buscaSequencialTransposicao(int* arr, int n, int x){
     return FALSE;
 }
 
-int ex1c(int n_testes){
-    const int N = 50000;
-    unsigned encontrados = 0;
-
-    int* entradas = ler_inteiros("res/inteiros_entrada.txt", N);
-    int* consultas = ler_inteiros("res/inteiros_busca.txt", N);
-
+int ex1c(int n_testes, int* entradas_original, int* consultas_original){
 
     for(int j = 0; j < n_testes; j++){
+        unsigned encontrados = 0;
+        int* entradas = duplicarArray(entradas_original, INPUTSIZE);
+        int* consultas = duplicarArray(consultas_original, INPUTSIZE);
         printf("Busca %d: \n", j);
 
         // realiza busca sequencial com realocação
         clock_t _ini = inicia_tempo();
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < INPUTSIZE; i++) {
             // buscar o elemento consultas[i] na entrada
             int valor_busca = consultas[i];
-            if(buscaSequencialTransposicao(entradas, N, valor_busca))
+            if(buscaSequencialTransposicao(entradas, INPUTSIZE, valor_busca))
                 encontrados++;
         }
         double tempo_busca = finaliza_tempo(_ini);
 
         printf("Tempo de busca: %fs | ", tempo_busca);
         printf("Itens encontrados: %d\n", encontrados);
-        encontrados = 0;
     }
 
     return 0;
