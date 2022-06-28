@@ -3,41 +3,40 @@
 #include <time.h>
 
 #include "timeControl.h"
+#include "utils.h"
 
-// Definição do tipo booleano
-unsigned char typedef bool;
-#define TRUE  1
-#define FALSE 0
-
-int* ler_inteiros(const char * arquivo, const int n){
-    FILE* f = fopen(arquivo, "r");
-
-    int * inteiros = (int *) malloc(sizeof(int) * n);
-
-    for (int i = 0; !feof(f); i++)
-        fscanf(f, "%d\n", &inteiros[i]);
-
-    fclose(f);
-
-    return inteiros;
+int buscaSequencial(int* arr, int n, int x){
+    int i;
+    for (i = 0; i < n; i++)
+        if (arr[i] == x)
+            return TRUE;
+    return FALSE;
 }
 
-int main(int argc, char const *argv[]){
+
+int ex1a(int n_testes){
     const int N = 50000;
     unsigned encontrados = 0;
 
-    int* entradas = ler_inteiros("inteiros_entrada.txt", N);
-    int* consultas = ler_inteiros("inteiros_busca.txt", N);
+    int* entradas = ler_inteiros("res/inteiros_entrada.txt", N);
+    int* consultas = ler_inteiros("res/inteiros_busca.txt", N);
 
-    // realiza busca sequencial
-    clock_t _ini = inicia_tempo();
-    for (int i = 0; i < N; i++) {
-        // buscar o elemento consultas[i] na entrada
+    for(int j = 0; j < n_testes; j++){
+        printf("Busca %d: \n", j);
+
+        // realiza busca sequencial
+        clock_t _ini = inicia_tempo();
+        for (int i = 0; i < N; i++) {
+            // buscar o elemento consultas[i] na entrada
+            int valor_busca = consultas[i];
+            if(buscaSequencial(entradas, N, valor_busca))
+                encontrados++;
+        }
+        double tempo_busca = finaliza_tempo(_ini);
+
+        printf("Tempo de busca: %fs | ", tempo_busca);
+        printf("Itens encontrados: %d\n", encontrados);
+        encontrados = 0;
     }
-    double tempo_busca = finaliza_tempo(_ini);
-
-    printf("Tempo de busca    :\t%fs\n", tempo_busca);
-    printf("Itens encontrados :\t%d\n", encontrados);
-
     return 0;
 }
