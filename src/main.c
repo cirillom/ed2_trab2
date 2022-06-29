@@ -19,7 +19,7 @@ int main(int argc, char const *argv[]){
     printf("**Busca por transposição** \n");
     ex1c(3, entradas_original, consultas_original);
     printf("\n\n\n");
-
+    
     printf("**Busca sequencial por indice** \n");
     ex1d(3, entradas_original, consultas_original);
     printf("\n\n\n");
