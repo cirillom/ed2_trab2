@@ -31,6 +31,4 @@ int* duplicarArray(int* arr, int n);
 
 string* duplicarString(string* arr, int n);
 
-void quicksort(int* vector,int c, int f);
-
 #endif
