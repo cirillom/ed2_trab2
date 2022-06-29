@@ -21,6 +21,9 @@ int main(int argc, char const *argv[]){
     printf("\n\n\n");
     
     printf("**Busca sequencial por indice** \n");
-    ex1d(3, entradas_original, consultas_original);
+    ex1d(1, entradas_original, consultas_original);
     printf("\n\n\n");
+
+    free(entradas_original);
+    free(consultas_original);
 }

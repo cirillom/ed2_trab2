@@ -26,4 +26,6 @@ int trocar(int* arr, int i1, int i2);
 
 int* duplicarArray(int* arr, int n);
 
+void quicksort(int* vector,int c, int f);
+
 #endif
