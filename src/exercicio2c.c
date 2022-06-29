@@ -33,18 +33,19 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         for (int i = 0; i < INPUTSIZE; i++) {
             // inserir insercoes[i] na tabela hash
             unsigned key = h_div_open(insercoes[i], B);
-            if(hashTable[key] == NULL)
+            if(hashTable[key] != NULL)
                 colisoes_h_div++;
             insert(&hashTable[key], insercoes[i]);
         }
         double tempo_insercao_h_div = finaliza_tempo(_ini);
 
-        FILE* fp = fopen("build/out.txt", "a");
+        //mostra a hash table em um arquivo
+        /* FILE* fp = fopen("build/out.txt", "a");
         for (int i = 0; i < INPUTSIZE; i++){
             printList(&hashTable[i], fp);
             fprintf(fp, "\n");
         }
-        fclose(fp);
+        fclose(fp); */
         
         // busca dos dados na tabela hash com hash por divisão
         _ini = inicia_tempo();
@@ -67,15 +68,29 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
 
 
 
-
         // cria tabela hash com hash por multiplicação
+        hashTable = (Node**) malloc(sizeof(Node*) * B);
+        for (int i = 0; i < B; i++){
+            hashTable[i] = NULL;
+        }
 
         // inserção dos dados na tabela hash com hash por multiplicação
         _ini = inicia_tempo();
         for (int i = 0; i < INPUTSIZE; i++) {
             // inserir insercoes[i] na tabela hash
+            unsigned key = h_mul_open(insercoes[i], B);
+            if(hashTable[key] != NULL)
+                colisoes_h_mul++;
+            insert(&hashTable[key], insercoes[i]);
         }
         double tempo_insercao_h_mul = finaliza_tempo(_ini);
+
+        FILE* fp = fopen("build/out.txt", "a");
+        for (int i = 0; i < INPUTSIZE; i++){
+            printList(&hashTable[i], fp);
+            fprintf(fp, "\n");
+        }
+        fclose(fp);
 
         // busca dos dados na tabela hash com hash por multiplicação
         _ini = inicia_tempo();

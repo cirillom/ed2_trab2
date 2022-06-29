@@ -23,7 +23,7 @@ unsigned h_mul_closed(unsigned x, unsigned i, unsigned B);
 
 unsigned h_div_open(string str, unsigned B);
 
-unsigned h_mul_open(unsigned x, unsigned B);
+unsigned h_mul_open(string str, unsigned B);
 
 int* ler_inteiros(const char * arquivo, const int n);
 
