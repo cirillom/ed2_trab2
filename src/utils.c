@@ -27,13 +27,26 @@ string* ler_strings(const char * arquivo, const int n){
     return strings;
 }
 
-unsigned h_div(unsigned x, unsigned i, unsigned B){
+unsigned h_div_closed(unsigned x, unsigned i, unsigned B){
     return ((x % B) + i) % B;
 }
 
-unsigned h_mul(unsigned x, unsigned i, unsigned B){
+unsigned h_mul_closed(unsigned x, unsigned i, unsigned B){
     const double A = 0.6180;
     return  ((int) ((fmod(x * A, 1) * B) + i)) % B;
+}
+
+unsigned h_div_open(string str, unsigned B){
+    int x = 0;
+    for (size_t i = 0; i < strlen(str); i++){
+        x+= (int)str[i];
+    }
+    return x % B;
+}
+
+unsigned h_mul_open(unsigned x, unsigned B){
+    const double A = 0.6180;
+    return fmod(x * A, 1) * B;
 }
 
 int* ler_inteiros(const char * arquivo, const int n){
@@ -51,6 +64,14 @@ int* ler_inteiros(const char * arquivo, const int n){
 
 int* duplicarArray(int* arr, int n){
     int* novo = (int *) malloc(sizeof(int) * n);
+    for (int i = 0; i < n; i++)
+        novo[i] = arr[i];
+    
+    return novo;    
+}
+
+string* duplicarString(string* arr, int n){
+    string* novo = (string *) malloc(sizeof(string) * n);
     for (int i = 0; i < n; i++)
         novo[i] = arr[i];
     

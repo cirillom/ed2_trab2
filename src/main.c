@@ -3,24 +3,31 @@
 #include "exercicio.h"
 #include "utils.h"
 
-int main(int argc, char const *argv[]){
+int main(){
     const int N = 50000;
-    int* entradas_original = ler_inteiros("res/inteiros_entrada.txt", N);
-    int* consultas_original = ler_inteiros("res/inteiros_busca.txt", N);
+    int* entradas_numericas_original = ler_inteiros("res/inteiros_entrada.txt", N);
+    int* consultas_numericas_original = ler_inteiros("res/inteiros_busca.txt", N);
 
     printf("**Busca sequencial simples** \n");
-    ex1a(3, entradas_original, consultas_original);
+    ex1a(0, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
 
     printf("**Busca mover-para-frente** \n");
-    ex1b(3, entradas_original, consultas_original);
+    ex1b(0, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
 
     printf("**Busca por transposição** \n");
-    ex1c(3, entradas_original, consultas_original);
+    ex1c(0, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
 
     printf("**Busca sequencial por indice** \n");
-    ex1d(3, entradas_original, consultas_original);
+    ex1d(0, entradas_numericas_original, consultas_numericas_original);
+    printf("\n\n\n");
+
+    string* insercoes_string_original = ler_strings("res/strings_entrada.txt", INPUTSIZE);
+    string* consultas_string_original = ler_strings("res/strings_busca.txt", CONSULTASIZE);
+
+    printf("**Busca hashing aberto** \n");
+    ex2c(1, insercoes_string_original, consultas_string_original);
     printf("\n\n\n");
 }
