@@ -19,6 +19,8 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         unsigned encontrados_h_div = 0;
         unsigned encontrados_h_mul = 0;
 
+        printf("Busca %d: \n", j);
+
         string* insercoes = duplicarString(insercao_original, INPUTSIZE);
         string* consultas = duplicarString(consultas_original, CONSULTASIZE);
 
@@ -40,12 +42,12 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         double tempo_insercao_h_div = finaliza_tempo(_ini);
 
         //mostra a hash table em um arquivo
-        /* FILE* fp = fopen("build/out.txt", "a");
+        FILE* fp = fopen("build/hash_div_open.txt", "a");
         for (int i = 0; i < INPUTSIZE; i++){
             printList(&hashTable[i], fp);
             fprintf(fp, "\n");
         }
-        fclose(fp); */
+        fclose(fp);
         
         // busca dos dados na tabela hash com hash por divisão
         _ini = inicia_tempo();
@@ -85,8 +87,8 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         }
         double tempo_insercao_h_mul = finaliza_tempo(_ini);
 
-        FILE* fp = fopen("build/out.txt", "a");
-        for (int i = 0; i < INPUTSIZE; i++){
+        fp = fopen("build/hash_mul_open.txt", "a");
+        for (int i = 0; i < B; i++){
             printList(&hashTable[i], fp);
             fprintf(fp, "\n");
         }
@@ -96,24 +98,35 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         _ini = inicia_tempo();
         for (int i = 0; i < CONSULTASIZE; i++) {
             // buscar consultas[i] na tabela hash
+            unsigned key = h_mul_open(consultas[i], B);
+
+            if(hashTable[key] == NULL)
+                continue;
+            
+            if(findInList(&hashTable[key], consultas[i]) != NULL)
+                encontrados_h_mul++;
         }
         double tempo_busca_h_mul = finaliza_tempo(_ini);
 
         // destroi tabela hash com hash por multiplicação
+        for(int i = 0; i < B; i++)
+            freeList(&hashTable[i]);
+        free(hashTable);
 
 
 
-        printf("Hash por Divisão\n");
-        printf("Colisões na inserção: %d\n", colisoes_h_div);
-        printf("Tempo de inserção   : %fs\n", tempo_insercao_h_div);
-        printf("Tempo de busca      : %fs\n", tempo_busca_h_div);
-        printf("Itens encontrados   : %d\n", encontrados_h_div);
+        printf("Hash por Divisão \t-> ");
+        printf("Colisões na inserção: %d | ", colisoes_h_div);
+        printf("Tempo de inserção: %fs | ", tempo_insercao_h_div);
+        printf("Tempo de busca: %fs | ", tempo_busca_h_div);
+        printf("Itens encontrados: %d", encontrados_h_div);
         printf("\n");
-        printf("Hash por Multiplicação\n");
-        printf("Colisões na inserção: %d\n", colisoes_h_mul);
-        printf("Tempo de inserção   : %fs\n", tempo_insercao_h_mul);
-        printf("Tempo de busca      : %fs\n", tempo_busca_h_mul);
-        printf("Itens encontrados   : %d\n", encontrados_h_mul);
+        printf("Hash por Multiplicação \t-> ");
+        printf("Colisões na inserção: %d | ", colisoes_h_mul);
+        printf("Tempo de inserção: %fs | ", tempo_insercao_h_mul);
+        printf("Tempo de busca: %fs | ", tempo_busca_h_mul);
+        printf("Itens encontrados: %d\n", encontrados_h_mul);
+        printf("\n");
 
         free(insercoes);
         free(consultas);

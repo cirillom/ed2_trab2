@@ -14,7 +14,7 @@ int main(){
     printf("\n\n\n");
 
     printf("**Busca mover-para-frente** \n");
-    ex1b(1, entradas_numericas_original, consultas_numericas_original);
+    ex1b(0, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
 
     printf("**Busca por transposição** \n");
@@ -32,8 +32,7 @@ int main(){
     string* consultas_string_original = ler_strings("res/strings_busca.txt", CONSULTASIZE);
 
     printf("**Busca hashing aberto** \n");
-    ex2c(0, insercoes_string_original, consultas_string_original);
-    printf("\n\n\n");
+    ex2c(1, insercoes_string_original, consultas_string_original);
 
     for(int i = 0; i < INPUTSIZE; i++)
         free(insercoes_string_original[i]);

@@ -5,8 +5,7 @@
 
 #include "linkedList.h"
 
-typedef struct _node
-{
+typedef struct _node{
     NODEDATATYPE data;
     struct _node* next;
 }Node;

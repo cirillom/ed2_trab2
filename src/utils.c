@@ -37,23 +37,13 @@ unsigned h_mul_closed(unsigned x, unsigned i, unsigned B){
 }
 
 unsigned h_div_open(string str, unsigned B){
-    int x = 0;
-    for (size_t i = 0; i < strlen(str); i++){
-        x+= (int)str[i];
-    }
+    unsigned x = converter(str);
     return x % B;
 }
 
 unsigned h_mul_open(string str, unsigned B){
     const double A = 0.6180;
-    int x = 0;
-    for (size_t i = 0; i < strlen(str); i++){
-        x+= (int)str[i];
-    }
-        FILE* fp = fopen("build/hash.txt", "a");
-            fprintf(fp, "%f \n", fmod(x * A, 1) * B);
-        fclose(fp);
-
+    unsigned x = converter(str);
     return fmod(x * A, 1) * B;
 }
 
