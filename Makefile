@@ -2,7 +2,7 @@
 CC ?= gcc
 CFLAGS += -Wall -Wextra -Wpedantic
 LDFLAGS += -lm
-VDFLAGS += --leak-check=full -s
+VDFLAGS += --leak-check=full --show-leak-kinds=all -s
 
 EXECUTABLE ?= build/main
 TEST_CFILES = $(wildcard src/*_teste.c)
