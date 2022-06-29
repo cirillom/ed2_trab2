@@ -10,7 +10,7 @@ int main(){
     int* consultas_numericas_original = ler_inteiros("res/inteiros_busca.txt", N);
 
     printf("**Busca sequencial simples** \n");
-    ex1a(0, entradas_numericas_original, consultas_numericas_original);
+    ex1a(1, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
 
     printf("**Busca mover-para-frente** \n");
@@ -18,11 +18,11 @@ int main(){
     printf("\n\n\n");
 
     printf("**Busca por transposição** \n");
-    ex1c(0, entradas_numericas_original, consultas_numericas_original);
+    ex1c(1, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
     
     printf("**Busca sequencial por indice** \n");
-    ex1d(0, entradas_numericas_original, consultas_numericas_original);
+    ex1d(3, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
 
     free(entradas_numericas_original);

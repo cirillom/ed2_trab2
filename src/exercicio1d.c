@@ -39,31 +39,10 @@ void quicksort(int* vector,int c, int f){
     quicksort(vector,j+1,f);
 }
 
-int ex1d(int n_testes, int* entradas_original, int* consultas_original){
-    for(int j = 0; j < n_testes; j++){
-        unsigned encontrados = 0;
-        int* entradas = duplicarArray(entradas_original, INPUTSIZE);
-        int* consultas = duplicarArray(consultas_original, INPUTSIZE);
-        printf("Busca %d: \n", j);
+int buscaSequencialIndice(int* entradas,int* consultas,numberTable* table,int s,int i){
+    int indexToBeSearched = -1;
 
-        // ordenar entrada
-        quicksort(entradas,0,INPUTSIZE-1);
-
-        // criar tabela de indice
-        int s = 10000;
-        numberTable* table = malloc(sizeof(numberTable)*(INPUTSIZE/s));
-
-        for(int i = 0;i<(INPUTSIZE/s);i++){
-            table[i].index = i;
-            table[i].n = entradas[i*s];
-        }
-
-        // realizar consultas na tabela de indices 
-        clock_t _ini = inicia_tempo();
-        for (int i = 0; i < INPUTSIZE; i++) {
-
-            int indexToBeSearched = -1;
-
+            // buscar o elemento na tabela de indices
             for(int j = (INPUTSIZE/s)-1;j >= 0;j--){
                 if(consultas[i]>=table[j].n){
                     indexToBeSearched = table[j].index;
@@ -74,8 +53,40 @@ int ex1d(int n_testes, int* entradas_original, int* consultas_original){
             // buscar o elemento consultas[i] na entrada
             for(int j = indexToBeSearched*s;j<=(indexToBeSearched+1)*s-1;j++){
                 if(entradas[j] == consultas[i]){
-                    encontrados++;
+                    return 1;
                 }
+            }
+            return 0;
+}
+
+int ex1d(int n_testes, int* entradas_original, int* consultas_original){
+    for(int j = 0; j < n_testes; j++){
+
+        unsigned encontrados = 0;
+
+        int* entradas = duplicarArray(entradas_original, INPUTSIZE);
+        int* consultas = duplicarArray(consultas_original, INPUTSIZE);
+        printf("Busca %d: \n", j);
+
+        // ordenar entrada
+        quicksort(entradas,0,INPUTSIZE-1);
+
+        // criar tabela de indice
+        int s = 10000;
+        int wordsPerIndice = INPUTSIZE/s;
+
+        numberTable* table = malloc(sizeof(numberTable)*wordsPerIndice);
+
+        for(int i = 0;i<wordsPerIndice;i++){
+            table[i].index = i;
+            table[i].n = entradas[i*s];
+        }
+
+        //realiza a busca sequencial com indice
+        clock_t _ini = inicia_tempo();
+        for (int i = 0; i < INPUTSIZE; i++) {
+            if(buscaSequencialIndice(entradas,consultas,table,s,i)){
+                encontrados++;
             }
         }
 
