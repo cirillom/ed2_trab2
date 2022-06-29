@@ -49,16 +49,6 @@ int* ler_inteiros(const char * arquivo, const int n){
     return inteiros;
 }
 
-int trocar(int* arr, int i1, int i2){
-    if(i1 < 0 || i2<0)
-        return FALSE;
-
-    int temp = arr[i1];
-    arr[i1] = arr[i2];
-    arr[i2] = temp;
-    return TRUE;
-}
-
 int* duplicarArray(int* arr, int n){
     int* novo = (int *) malloc(sizeof(int) * n);
     for (int i = 0; i < n; i++)

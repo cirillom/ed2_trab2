@@ -22,8 +22,6 @@ unsigned h_mul(unsigned x, unsigned i, unsigned B);
 
 int* ler_inteiros(const char * arquivo, const int n);
 
-int trocar(int* arr, int i1, int i2);
-
 int* duplicarArray(int* arr, int n);
 
 #endif

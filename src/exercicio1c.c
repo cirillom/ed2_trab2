@@ -5,6 +5,16 @@
 #include "timeControl.h"
 #include "utils.h"
 
+int trocar(int* arr, int i1, int i2){
+    if(i1 < 0 || i2<0)
+        return FALSE;
+
+    int temp = arr[i1];
+    arr[i1] = arr[i2];
+    arr[i2] = temp;
+    return TRUE;
+}
+
 int buscaSequencialTransposicao(int* arr, int n, int x){
     int i;
     for (i = 0; i < n; i++)
