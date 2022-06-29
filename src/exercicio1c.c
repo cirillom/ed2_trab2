@@ -45,6 +45,9 @@ int ex1c(int n_testes, int* entradas_original, int* consultas_original){
 
         printf("Tempo de busca: %fs | ", tempo_busca);
         printf("Itens encontrados: %d\n", encontrados);
+
+        free(entradas);
+        free(consultas);
     }
 
     return 0;
