@@ -50,9 +50,9 @@ unsigned h_mul_open(string str, unsigned B){
     for (size_t i = 0; i < strlen(str); i++){
         x+= (int)str[i];
     }
-        FILE* fp = fopen("build/hash.txt", "a");
-            fprintf(fp, "%f \n", fmod(x * A, 1) * B);
-        fclose(fp);
+        /* FILE* fp = fopen("build/hash.txt", "a");
+        fprintf(fp, "%f \n", fmod(x * A, 1) * B);
+        fclose(fp); */
 
     return fmod(x * A, 1) * B;
 }
