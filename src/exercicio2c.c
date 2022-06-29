@@ -19,6 +19,8 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         unsigned encontrados_h_div = 0;
         unsigned encontrados_h_mul = 0;
 
+        printf("Busca %d: \n", j);
+
         string* insercoes = duplicarString(insercao_original, INPUTSIZE);
         string* consultas = duplicarString(consultas_original, CONSULTASIZE);
 
@@ -113,17 +115,18 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
 
 
 
-        printf("Hash por Divisão\n");
-        printf("Colisões na inserção: %d\n", colisoes_h_div);
-        printf("Tempo de inserção   : %fs\n", tempo_insercao_h_div);
-        printf("Tempo de busca      : %fs\n", tempo_busca_h_div);
-        printf("Itens encontrados   : %d\n", encontrados_h_div);
+        printf("Hash por Divisão \t-> ");
+        printf("Colisões na inserção: %d | ", colisoes_h_div);
+        printf("Tempo de inserção: %fs | ", tempo_insercao_h_div);
+        printf("Tempo de busca: %fs | ", tempo_busca_h_div);
+        printf("Itens encontrados: %d", encontrados_h_div);
         printf("\n");
-        printf("Hash por Multiplicação\n");
-        printf("Colisões na inserção: %d\n", colisoes_h_mul);
-        printf("Tempo de inserção   : %fs\n", tempo_insercao_h_mul);
-        printf("Tempo de busca      : %fs\n", tempo_busca_h_mul);
-        printf("Itens encontrados   : %d\n", encontrados_h_mul);
+        printf("Hash por Multiplicação \t-> ");
+        printf("Colisões na inserção: %d | ", colisoes_h_mul);
+        printf("Tempo de inserção: %fs | ", tempo_insercao_h_mul);
+        printf("Tempo de busca: %fs | ", tempo_busca_h_mul);
+        printf("Itens encontrados: %d\n", encontrados_h_mul);
+        printf("\n");
 
         free(insercoes);
         free(consultas);
