@@ -26,9 +26,11 @@ int ex1a(int n_testes, int* entradas_original, int* consultas_original){
         clock_t _ini = inicia_tempo();
         for (int i = 0; i < INPUTSIZE; i++) {
             // buscar o elemento consultas[i] na entrada
+
             int valor_busca = consultas[i];
-            if(buscaSequencial(entradas, INPUTSIZE, valor_busca))
+            if(buscaSequencial(entradas, INPUTSIZE, valor_busca)){
                 encontrados++;
+            }
         }
         double tempo_busca = finaliza_tempo(_ini);
 

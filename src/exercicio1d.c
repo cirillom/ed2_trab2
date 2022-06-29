@@ -5,6 +5,11 @@
 #include "timeControl.h"
 #include "utils.h"
 
+typedef struct{
+  int n;
+  int index;
+}numberTable;
+
 void quicksort(int* vector,int c, int f){
     if (c>=f){
         return;
@@ -45,13 +50,35 @@ int ex1d(int n_testes, int* entradas_original, int* consultas_original){
         quicksort(entradas,0,INPUTSIZE);
 
         // criar tabela de indice
+        int s = 10000;
+        numberTable* table = malloc(sizeof(numberTable)*(INPUTSIZE/s));
 
+        for(int i = 0;i<(INPUTSIZE/s);i++){
+            table[i].index = i;
+            table[i].n = entradas[i*s];
+        }
 
         // realizar consultas na tabela de indices 
         clock_t _ini = inicia_tempo();
         for (int i = 0; i < INPUTSIZE; i++) {
+
+            int indexToBeSearched = -1;
+
+            for(int j = (INPUTSIZE/s)-1;j >= 0;j--){
+                if(consultas[i]>=table[j].n){
+                    indexToBeSearched = table[j].index;
+                    break;
+                }
+            }
+
             // buscar o elemento consultas[i] na entrada
+            for(int j = indexToBeSearched*s;j<=(indexToBeSearched+1)*s;j++){
+                if(entradas[j] == consultas[i]){
+                    encontrados++;
+                }
+            }
         }
+        free(table);
         double tempo_busca = finaliza_tempo(_ini);
 
         printf("Tempo de busca: %fs | ", tempo_busca);

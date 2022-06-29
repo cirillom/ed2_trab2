@@ -19,7 +19,7 @@ int main(){
     printf("**Busca por transposição** \n");
     ex1c(0, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
-
+    
     printf("**Busca sequencial por indice** \n");
     ex1d(0, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
