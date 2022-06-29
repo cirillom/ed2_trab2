@@ -2,6 +2,7 @@
 CC ?= gcc
 CFLAGS += -Wall -Wextra -Wpedantic
 LDFLAGS += -lm
+VDFLAGS += --leak-check=full -s
 
 EXECUTABLE ?= build/main
 TEST_CFILES = $(wildcard src/*_teste.c)
@@ -49,4 +50,4 @@ build/%.o: src/%.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 valgrind: $(EXECUTABLE)
-	cd $(BUILDD) && valgrind $(VDFLAGS) ./$(PROGNAME)
+	valgrind $(VDFLAGS) ./$(EXECUTABLE)
