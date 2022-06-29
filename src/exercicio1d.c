@@ -10,6 +10,35 @@ typedef struct{
   int index;
 }numberTable;
 
+void quicksort(int* vector,int c, int f){
+    if (c>=f){
+        return;
+    }
+    int m = (c+f)/2;
+    int pivot = vector[m];
+    int i = c;
+    int j = f;
+    while(1){
+        while (vector[i]<pivot)
+        {
+            i++;
+        }
+        while(vector[j]>pivot){
+            j--;
+        }
+        if(j <= i){
+            break;
+        }
+        int tmp = vector[i];
+        vector[i] = vector[j];
+        vector[j] = tmp;
+        i++;
+        j--;
+    }
+    quicksort(vector,c,j);
+    quicksort(vector,j+1,f);
+}
+
 int ex1d(int n_testes, int* entradas_original, int* consultas_original){
     for(int j = 0; j < n_testes; j++){
         unsigned encontrados = 0;
@@ -60,33 +89,4 @@ int ex1d(int n_testes, int* entradas_original, int* consultas_original){
         free(table);
     }
     return 0;
-}
-
-void quicksort(int* vector,int c, int f){
-    if (c>=f){
-        return;
-    }
-    int m = (c+f)/2;
-    int pivot = vector[m];
-    int i = c;
-    int j = f;
-    while(1){
-        while (vector[i]<pivot)
-        {
-            i++;
-        }
-        while(vector[j]>pivot){
-            j--;
-        }
-        if(j <= i){
-            break;
-        }
-        int tmp = vector[i];
-        vector[i] = vector[j];
-        vector[j] = tmp;
-        i++;
-        j--;
-    }
-    quicksort(vector,c,j);
-    quicksort(vector,j+1,f);
 }
