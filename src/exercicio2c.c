@@ -44,6 +44,7 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
             printList(&hashTable[i], fp);
             fprintf(fp, "\n");
         }
+        fclose(fp);
         
         // busca dos dados na tabela hash com hash por divisão
         _ini = inicia_tempo();
@@ -60,7 +61,9 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         double tempo_busca_h_div = finaliza_tempo(_ini);
 
         // destroi tabela hash com hash por divisão
-        freeList(hashTable);
+        for(int i = 0; i < B; i++)
+            freeList(&hashTable[i]);
+        free(hashTable);
 
 
 
@@ -96,6 +99,9 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         printf("Tempo de inserção   : %fs\n", tempo_insercao_h_mul);
         printf("Tempo de busca      : %fs\n", tempo_busca_h_mul);
         printf("Itens encontrados   : %d\n", encontrados_h_mul);
+
+        free(insercoes);
+        free(consultas);
     }
 
     return 0;
