@@ -10,6 +10,58 @@ typedef struct{
   int index;
 }numberTable;
 
+int ex1d(int n_testes, int* entradas_original, int* consultas_original){
+    for(int j = 0; j < n_testes; j++){
+        unsigned encontrados = 0;
+        int* entradas = duplicarArray(entradas_original, INPUTSIZE);
+        int* consultas = duplicarArray(consultas_original, INPUTSIZE);
+        printf("Busca %d: \n", j);
+
+        // ordenar entrada
+        quicksort(entradas,0,INPUTSIZE-1);
+
+        // criar tabela de indice
+        int s = 10000;
+        numberTable* table = malloc(sizeof(numberTable)*(INPUTSIZE/s));
+
+        for(int i = 0;i<(INPUTSIZE/s);i++){
+            table[i].index = i;
+            table[i].n = entradas[i*s];
+        }
+
+        // realizar consultas na tabela de indices 
+        clock_t _ini = inicia_tempo();
+        for (int i = 0; i < INPUTSIZE; i++) {
+
+            int indexToBeSearched = -1;
+
+            for(int j = (INPUTSIZE/s)-1;j >= 0;j--){
+                if(consultas[i]>=table[j].n){
+                    indexToBeSearched = table[j].index;
+                    break;
+                }
+            }
+
+            // buscar o elemento consultas[i] na entrada
+            for(int j = indexToBeSearched*s;j<=(indexToBeSearched+1)*s-1;j++){
+                if(entradas[j] == consultas[i]){
+                    encontrados++;
+                }
+            }
+        }
+
+        double tempo_busca = finaliza_tempo(_ini);
+
+        printf("Tempo de busca: %fs | ", tempo_busca);
+        printf("Itens encontrados: %d\n", encontrados);
+
+        free(entradas);
+        free(consultas);
+        free(table);
+    }
+    return 0;
+}
+
 void quicksort(int* vector,int c, int f){
     if (c>=f){
         return;
@@ -37,52 +89,4 @@ void quicksort(int* vector,int c, int f){
     }
     quicksort(vector,c,j);
     quicksort(vector,j+1,f);
-}
-
-int ex1d(int n_testes, int* entradas_original, int* consultas_original){
-    for(int j = 0; j < n_testes; j++){
-        unsigned encontrados = 0;
-        int* entradas = duplicarArray(entradas_original, INPUTSIZE);
-        int* consultas = duplicarArray(consultas_original, INPUTSIZE);
-        printf("Busca %d: \n", j);
-
-        // ordenar entrada
-        quicksort(entradas,0,INPUTSIZE);
-
-        // criar tabela de indice
-        int s = 10000;
-        numberTable* table = malloc(sizeof(numberTable)*(INPUTSIZE/s));
-
-        for(int i = 0;i<(INPUTSIZE/s);i++){
-            table[i].index = i;
-            table[i].n = entradas[i*s];
-        }
-
-        // realizar consultas na tabela de indices 
-        clock_t _ini = inicia_tempo();
-        for (int i = 0; i < INPUTSIZE; i++) {
-
-            int indexToBeSearched = -1;
-
-            for(int j = (INPUTSIZE/s)-1;j >= 0;j--){
-                if(consultas[i]>=table[j].n){
-                    indexToBeSearched = table[j].index;
-                    break;
-                }
-            }
-
-            // buscar o elemento consultas[i] na entrada
-            for(int j = indexToBeSearched*s;j<=(indexToBeSearched+1)*s;j++){
-                if(entradas[j] == consultas[i]){
-                    encontrados++;
-                }
-            }
-        }
-        free(table);
-        double tempo_busca = finaliza_tempo(_ini);
-
-        printf("Tempo de busca: %fs | ", tempo_busca);
-        printf("Itens encontrados: %d\n", encontrados);
-    }
-    return 0;
 }
