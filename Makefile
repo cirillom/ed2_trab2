@@ -1,6 +1,6 @@
 
 CC ?= gcc
-CFLAGS += -Wall -Wextra -Wpedantic
+CFLAGS += -O3 -Wall -Wextra -Wpedantic
 LDFLAGS += -lm
 VDFLAGS += --leak-check=full --show-leak-kinds=all -s
 
@@ -30,7 +30,7 @@ run: $(EXECUTABLE)
 
 test: $(TEST_BINS)
 
-debug: CFLAGS+=-g -O0
+debug: CFLAGS+= -g -O0
 debug: clean
 debug: $(EXECUTABLE) test
 
