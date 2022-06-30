@@ -22,7 +22,7 @@ int main(){
     printf("\n\n\n");
     
     printf("**Busca sequencial por indice** \n");
-    ex1d(0, entradas_numericas_original, consultas_numericas_original);
+    ex1d(1, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
 
     free(entradas_numericas_original);

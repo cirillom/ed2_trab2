@@ -39,21 +39,21 @@ void quicksort(int* vector,int c, int f){
     quicksort(vector,j+1,f);
 }
 
-numberTable* createTable(int wordsPerIndex,int* entradas,int s){
-    numberTable* table = malloc(sizeof(numberTable)*wordsPerIndex);
+numberTable* createTable(int countIndex,int* entradas,int wordsPerIndex){
+    numberTable* table = malloc(sizeof(numberTable)*countIndex);
 
-        for(int i = 0;i<wordsPerIndex;i++){
+        for(int i = 0;i<countIndex;i++){
             table[i].index = i;
-            table[i].n = entradas[i*s];
+            table[i].n = entradas[i*wordsPerIndex];
         }
     return table;
 }
 
-int buscaSequencialIndice(int* entradas,int* consultas,numberTable* table,int s,int i){
+int buscaSequencialIndice(int* entradas,int* consultas,numberTable* table,int wordsPerIndex,int i){
     int indexToBeSearched = -1;
 
             // buscar o elemento na tabela de indices
-            for(int j = (INPUTSIZE/s)-1;j >= 0;j--){
+            for(int j = (INPUTSIZE/wordsPerIndex)-1;j >= 0;j--){
                 if(consultas[i]>=table[j].n){
                     indexToBeSearched = table[j].index;
                     break;
@@ -61,7 +61,7 @@ int buscaSequencialIndice(int* entradas,int* consultas,numberTable* table,int s,
             }
 
             // buscar o elemento consultas[i] na entrada
-            for(int j = indexToBeSearched*s;j<=(indexToBeSearched+1)*s-1;j++){
+            for(int j = indexToBeSearched*wordsPerIndex;j<=(indexToBeSearched+1)*wordsPerIndex-1;j++){
                 if(entradas[j] == consultas[i]){
                     return 1;
                 }
@@ -81,15 +81,15 @@ int ex1d(int n_testes, int* entradas_original, int* consultas_original){
         // ordenar entrada
         quicksort(entradas,0,INPUTSIZE-1);
 
-        int s = 10000;
+        int wordsPerIndex = 10000;
         // criar tabela de indice
-        int wordsPerIndex = INPUTSIZE/s;
-        numberTable* table = createTable(wordsPerIndex,entradas,s);
+        int countIndex = INPUTSIZE/wordsPerIndex;
+        numberTable* table = createTable(countIndex,entradas,wordsPerIndex);
 
         //realiza a busca sequencial com indice
         clock_t _ini = inicia_tempo();
         for (int i = 0; i < INPUTSIZE; i++) {
-            if(buscaSequencialIndice(entradas,consultas,table,s,i)){
+            if(buscaSequencialIndice(entradas,consultas,table,wordsPerIndex,i)){
                 encontrados++;
             }
         }
