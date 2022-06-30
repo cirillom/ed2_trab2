@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "timeControl.h"
 
 clock_t inicia_tempo(){
