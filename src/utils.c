@@ -36,17 +36,6 @@ unsigned h_mul_closed(unsigned x, unsigned i, unsigned B){
     return  ((int) ((fmod(x * A, 1) * B) + i)) % B;
 }
 
-unsigned h_div_open(string str, unsigned B){
-    unsigned x = converter(str);
-    return x % B;
-}
-
-unsigned h_mul_open(string str, unsigned B){
-    const double A = 0.6180;
-    unsigned x = converter(str);
-    return fmod(x * A, 1) * B;
-}
-
 int* ler_inteiros(const char * arquivo, const int n){
     FILE* f = fopen(arquivo, "r");
 

@@ -9,6 +9,17 @@
 #include "utils.h"
 #include "linkedList.h"
 
+unsigned h_div(string str, unsigned B){
+    unsigned x = converter(str);
+    return x % B;
+}
+
+unsigned h_mul(string str, unsigned B){
+    const double A = 0.6180;
+    unsigned x = converter(str);
+    return fmod(x * A, 1) * B;
+}
+
 int ex2c(int n_testes, string* insercao_original, string* consultas_original){
     for(int j = 0; j < n_testes; j++){
         const int B = 150001;
@@ -34,7 +45,7 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         clock_t _ini = inicia_tempo();
         for (int i = 0; i < INPUTSIZE; i++) {
             // inserir insercoes[i] na tabela hash
-            unsigned key = h_div_open(insercoes[i], B);
+            unsigned key = h_div(insercoes[i], B);
             if(hashTable[key] != NULL)
                 colisoes_h_div++;
             insert(&hashTable[key], insercoes[i]);
@@ -53,7 +64,7 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         _ini = inicia_tempo();
         for (int i = 0; i < CONSULTASIZE; i++) {
             // buscar consultas[i] na tabela hash
-            unsigned key = h_div_open(consultas[i], B);
+            unsigned key = h_div(consultas[i], B);
 
             if(hashTable[key] == NULL)
                 continue;
@@ -80,7 +91,7 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         _ini = inicia_tempo();
         for (int i = 0; i < INPUTSIZE; i++) {
             // inserir insercoes[i] na tabela hash
-            unsigned key = h_mul_open(insercoes[i], B);
+            unsigned key = h_mul(insercoes[i], B);
             if(hashTable[key] != NULL)
                 colisoes_h_mul++;
             insert(&hashTable[key], insercoes[i]);
@@ -98,7 +109,7 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         _ini = inicia_tempo();
         for (int i = 0; i < CONSULTASIZE; i++) {
             // buscar consultas[i] na tabela hash
-            unsigned key = h_mul_open(consultas[i], B);
+            unsigned key = h_mul(consultas[i], B);
 
             if(hashTable[key] == NULL)
                 continue;
