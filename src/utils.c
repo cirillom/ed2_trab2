@@ -64,3 +64,9 @@ string* duplicarString(string* arr, int n){
     
     return novo;    
 }
+
+void generateTimeCSV(string fileLoc, double tempo_busca, int encontrados){
+        FILE* fp = fopen(fileLoc, "a");
+        fprintf(fp, "%f, %d\n", tempo_busca, encontrados);
+        fclose(fp);
+}

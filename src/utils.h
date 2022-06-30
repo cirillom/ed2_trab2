@@ -28,4 +28,6 @@ int* duplicarArray(int* arr, int n);
 
 string* duplicarString(string* arr, int n);
 
+void generateTimeCSV(string fileLoc, double tempo_busca, int encontrados);
+
 #endif
