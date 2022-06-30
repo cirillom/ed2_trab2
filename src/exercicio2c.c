@@ -29,13 +29,23 @@ unsigned h_improved(string s, unsigned B) {
    return h;
 }
 
-void printHashTable(Node **hash_table, string fileLocation){
-    FILE* fp = fopen(fileLocation, "a");
+void printHashTable(Node **hash_table, string file_id){
+    string file_start = "build/hash_table_";
+    string file_extension = ".txt";
+    string file_loc = (string) malloc(sizeof(char) * (strlen(file_start) + strlen(file_id) + strlen(file_extension) + 1));
+    file_loc[0] = '\0';
+    strcat(file_loc, file_start);
+    strcat(file_loc, file_id);
+    strcat(file_loc, file_extension);
+
+    FILE* fp = fopen(file_loc, "a");
     for (int i = 0; i < INPUTSIZE; i++){
         printList(&hash_table[i], fp);
         fprintf(fp, "\n");
     }
     fclose(fp);
+
+    free(file_loc);
 }
 
 void hashSearcherTest(unsigned (*hash_function)(string, unsigned), string* insercoes, string* consultas, string id){
@@ -60,14 +70,7 @@ void hashSearcherTest(unsigned (*hash_function)(string, unsigned), string* inser
     double tempo_insercao = finaliza_tempo(_ini);
 
     //mostra a hash table em um arquivo
-    string file_start = "build/hash_table_";
-    string file_extension = ".txt";
-    string file_loc = (string) malloc(sizeof(char) * (strlen(file_start) + strlen(id) + strlen(file_extension) + 1));
-    file_loc[0] = '\0';
-    strcat(file_loc, file_start);
-    strcat(file_loc, id);
-    strcat(file_loc, file_extension);
-    printHashTable(hash_table, file_loc);
+    printHashTable(hash_table, id);
     
     // busca dos dados na tabela hash com hash por divisão
     _ini = inicia_tempo();
@@ -87,7 +90,6 @@ void hashSearcherTest(unsigned (*hash_function)(string, unsigned), string* inser
     for(unsigned i = 0; i < B; i++)
         freeList(&hash_table[i]);
     free(hash_table);
-    free(file_loc);
 
     printf("Hash por %s \t-> ", id);
     printf("Colisões na inserção: %d | ", colisoes);
@@ -104,9 +106,9 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         string* insercoes = duplicarString(insercao_original, INPUTSIZE);
         string* consultas = duplicarString(consultas_original, CONSULTASIZE);
 
-       hashSearcherTest(&h_div, insercoes, consultas, "divisao");
-       hashSearcherTest(&h_mul, insercoes, consultas, "multiplicacao");
-       hashSearcherTest(&h_improved, insercoes, consultas, "primos");
+        hashSearcherTest(&h_div, insercoes, consultas, "divisao");
+        hashSearcherTest(&h_mul, insercoes, consultas, "multiplicacao");
+        hashSearcherTest(&h_improved, insercoes, consultas, "primos");
 
         free(insercoes);
         free(consultas);
