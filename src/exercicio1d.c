@@ -39,6 +39,16 @@ void quicksort(int* vector,int c, int f){
     quicksort(vector,j+1,f);
 }
 
+numberTable* createTable(int wordsPerIndex,int* entradas,int s){
+    numberTable* table = malloc(sizeof(numberTable)*wordsPerIndex);
+
+        for(int i = 0;i<wordsPerIndex;i++){
+            table[i].index = i;
+            table[i].n = entradas[i*s];
+        }
+    return table;
+}
+
 int buscaSequencialIndice(int* entradas,int* consultas,numberTable* table,int s,int i){
     int indexToBeSearched = -1;
 
@@ -71,16 +81,10 @@ int ex1d(int n_testes, int* entradas_original, int* consultas_original){
         // ordenar entrada
         quicksort(entradas,0,INPUTSIZE-1);
 
-        // criar tabela de indice
         int s = 10000;
-        int wordsPerIndice = INPUTSIZE/s;
-
-        numberTable* table = malloc(sizeof(numberTable)*wordsPerIndice);
-
-        for(int i = 0;i<wordsPerIndice;i++){
-            table[i].index = i;
-            table[i].n = entradas[i*s];
-        }
+        // criar tabela de indice
+        int wordsPerIndex = INPUTSIZE/s;
+        numberTable* table = createTable(wordsPerIndex,entradas,s);
 
         //realiza a busca sequencial com indice
         clock_t _ini = inicia_tempo();
