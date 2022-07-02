@@ -26,7 +26,7 @@ int buscaSequencialTransposicao(int* arr, int n, int x){
 }
 
 int ex1c(int n_testes, int* entradas_original, int* consultas_original){
-    remove("res/busca_linear_transposicao.csv");
+    //remove("res/busca_linear_transposicao.csv");
     for(int j = 0; j < n_testes; j++){
         unsigned encontrados = 0;
         int* entradas = duplicarArray(entradas_original, INPUTSIZE);
@@ -46,7 +46,7 @@ int ex1c(int n_testes, int* entradas_original, int* consultas_original){
         printf("Tempo de busca: %fs | ", tempo_busca);
         printf("Itens encontrados: %d\n", encontrados);
 
-        generateTimeCSV("res/busca_linear_transposicao.csv", tempo_busca, encontrados);
+        generateSimpleSearchTimeCSV("res/busca_linear_transposicao.csv", tempo_busca, encontrados);
 
         free(entradas);
         free(consultas);
