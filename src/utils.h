@@ -28,6 +28,10 @@ int* duplicarArray(int* arr, int n);
 
 string* duplicarString(string* arr, int n);
 
-void generateTimeCSV(string fileLoc, double tempo_busca, int encontrados);
+void generateSimpleSearchTimeCSV(string fileLoc, double tempo_busca, int encontrados);
+
+void generateHashSearchTimeCSV(string fileLoc, int encontrados, int colisoes, double tempo_insercao, double tempo_busca);
+
+string retornarFileLoc(string folder, string name, string extensao);
 
 #endif
