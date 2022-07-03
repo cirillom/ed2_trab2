@@ -21,13 +21,12 @@ all: $(EXECUTABLE)
 clean:
 	@rm -f $(ZIPFILE)
 	@rm -rf build/
-	@rm -rf res/*.csv
+	@rm -rf out/*.csv
 
 zip: clean
 	7za a $(ZIPFILE) ./*
 
 run: $(EXECUTABLE)
-	@rm -rf res/*.csv
 	@./$(EXECUTABLE) $(ARGS)
 
 test: $(TEST_BINS)

@@ -37,7 +37,7 @@ int ex1a(int n_testes, int* entradas_original, int* consultas_original){
         printf("Tempo de busca: %fs | ", tempo_busca);
         printf("Itens encontrados: %d\n", encontrados);
 
-        generateSimpleSearchTimeCSV("res/busca_linear.csv", tempo_busca, encontrados);
+        generateSimpleSearchTimeCSV("out/busca_linear_simples.csv", tempo_busca, encontrados);
 
         free(entradas);
         free(consultas);

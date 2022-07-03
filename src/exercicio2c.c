@@ -91,7 +91,7 @@ void hashSearcherTest(unsigned (*hash_function)(string, unsigned), string* inser
         freeList(&hash_table[i]);
     free(hash_table);
 
-    string file_loc = retornarFileLoc("res/busca_hash_", id, ".csv");
+    string file_loc = retornarFileLoc("out/busca_hash_", id, ".csv");
     generateHashSearchTimeCSV(file_loc, encontrados, colisoes, tempo_insercao, tempo_busca);
     free(file_loc);
 
