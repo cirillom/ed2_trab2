@@ -22,7 +22,7 @@ int main(){
     printf("\n\n\n");
     
     printf("**Busca sequencial por indice** \n");
-    ex1d(1, entradas_numericas_original, consultas_numericas_original);
+    ex1d(0, entradas_numericas_original, consultas_numericas_original);
     printf("\n\n\n");
 
     free(entradas_numericas_original);
@@ -30,6 +30,12 @@ int main(){
 
     string* insercoes_string_original = ler_strings("res/strings_entrada.txt", INPUTSIZE);
     string* consultas_string_original = ler_strings("res/strings_busca.txt", CONSULTASIZE);
+
+    printf("**Busca hashing overflow progressivo** \n");
+    ex2a(1, insercoes_string_original, consultas_string_original);
+
+    printf("**Busca hashing hash duplo** \n");
+    ex2b(0, insercoes_string_original, consultas_string_original);
 
     printf("**Busca hashing aberto** \n");
     ex2c(1, insercoes_string_original, consultas_string_original);
