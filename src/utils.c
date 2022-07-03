@@ -80,24 +80,24 @@ string* duplicarString(string* arr, int n){
 void generateSimpleSearchTimeCSV(string file_loc, double tempo_busca, int encontrados){
         if(!checkIfFileExists(file_loc)){
             FILE* fp = fopen(file_loc, "w");
-            fprintf(fp, "Encontrados, Tempo\n");
+            fprintf(fp, "Encontrados,Tempo\n");
             fclose(fp);
         }
 
         FILE* fp = fopen(file_loc, "a");
-        fprintf(fp, "%d, %f\n", encontrados, tempo_busca);
+        fprintf(fp, "%d,%f\n", encontrados, tempo_busca);
         fclose(fp);
 }
 
 void generateHashSearchTimeCSV(string file_loc, int encontrados, int colisoes, double tempo_insercao, double tempo_busca){
         if(!checkIfFileExists(file_loc)){
             FILE* fp = fopen(file_loc, "w");
-            fprintf(fp, "Encontrados, Colisoes, Tempo Insercao, Tempo busca\n");
+            fprintf(fp, "Encontrados,Colisoes,TempoInsercao,TempoBusca\n");
             fclose(fp);
         }
 
         FILE* fp = fopen(file_loc, "a");
-        fprintf(fp, "%d, %d, %f, %f\n", encontrados, colisoes, tempo_insercao, tempo_busca);
+        fprintf(fp, "%d,%d,%f,%f\n", encontrados, colisoes, tempo_insercao, tempo_busca);
         fclose(fp);
 }
 
