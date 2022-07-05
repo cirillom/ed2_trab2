@@ -51,6 +51,12 @@ df_names = [
     'Multiplicação',
     'Primo']
 
+combined_df_names = []
+for type in df_types:
+    for name in df_names:
+        combined_df_names.append(type + " " + name)
+
+#region Clean data frame
 def dataframeCleaner(df, name):
     df.sort_values(df.keys()[0], inplace=True) #sort the values
     df.drop(index=df.index[0], axis=0, inplace=True) #remove the smallest value (high chance of being outlier)
@@ -66,8 +72,9 @@ for dfs in dfs_busca:
 for dfs in dfs_insercao:
     for df, name in zip(dfs, df_names):
         dataframeCleaner(df, name)
+#endregion
 
-
+#region Calculate median and std 
 def med_dsvp(dfs, key):
     medias = np.array([])
     dsvp = np.array([])
@@ -90,6 +97,33 @@ for i in range(len(dfs_insercao)):
     insercao_data_points[i][0], insercao_data_points[i][1] = med_dsvp(dfs_insercao[i], 'TempoInsercao')
 
 
+def GerarMediaCSV(data_points, type):
+    media = []; dsvp = []
+    for data in data_points:
+        for i in data[0]:
+            media.append(i)
+        for i in data[1]:
+            dsvp.append(i)
+
+    media_dsvp_df = pd.DataFrame([media, dsvp], index=['Média', 'Desvio'], columns=combined_df_names)
+    media_dsvp_df = media_dsvp_df.round(decimals=4)
+    media_dsvp_df = media_dsvp_df.transpose()
+    loc = 'out/' + type + '_hash_media_dsvp.csv'
+    media_dsvp_df.to_csv(loc)
+
+GerarMediaCSV(busca_data_points, 'busca')
+GerarMediaCSV(insercao_data_points, 'insercao')
+#endregion
+
+""" all_values_df = pd.DataFrame()
+
+for df, name in zip(dfs, df_names):
+    all_values_df[name] = df['Tempo']
+all_values_df = all_values_df.round(decimals=4)
+print(all_values_df)
+all_values_df.to_csv('out/busca_linear_completa.csv', index=False) """
+
+#region Generate graphs
 x = np.arange(len(df_types))
 width = 0.3
 fig1, ax1 = plt.subplots()
@@ -123,22 +157,4 @@ fig2.tight_layout()
 ax2.grid(which='major', axis='y')
 
 plt.show()
-
-combined_df_names = []
-for type in df_types:
-    for name in df_names:
-        combined_df_names.append(type + " " + name)
-
-""" busca_media_dsvp_df = pd.DataFrame([medias_busca, dsvp_busca], index=['Média', 'Desvio'], columns=combined_df_names)
-busca_media_dsvp_df = busca_media_dsvp_df.round(decimals=4)
-print(busca_media_dsvp_df)
-#busca_media_dsvp_df.to_csv(('out/busca_hash_media_dsvp.csv')) """
-
-
-""" all_values_df = pd.DataFrame()
-
-for df, name in zip(dfs, df_names):
-    all_values_df[name] = df['Tempo']
-all_values_df = all_values_df.round(decimals=4)
-print(all_values_df)
-all_values_df.to_csv('out/busca_linear_completa.csv', index=False) """
+#endregion
