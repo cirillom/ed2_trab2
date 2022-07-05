@@ -115,14 +115,6 @@ GerarMediaCSV(busca_data_points, 'busca')
 GerarMediaCSV(insercao_data_points, 'insercao')
 #endregion
 
-""" all_values_df = pd.DataFrame()
-
-for df, name in zip(dfs, df_names):
-    all_values_df[name] = df['Tempo']
-all_values_df = all_values_df.round(decimals=4)
-print(all_values_df)
-all_values_df.to_csv('out/busca_linear_completa.csv', index=False) """
-
 #region Generate graphs
 x = np.arange(len(df_types))
 width = 0.3
@@ -156,5 +148,7 @@ ax2.legend()
 fig2.tight_layout()
 ax2.grid(which='major', axis='y')
 
+fig1.savefig('out/busca_hash_media_e_desv_pad.png')
+fig2.savefig('out/insercao_hash_media_e_desv_pad.png')
 plt.show()
 #endregion
