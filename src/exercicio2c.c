@@ -110,9 +110,9 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         string* insercoes = duplicarString(insercao_original, INPUTSIZE);
         string* consultas = duplicarString(consultas_original, CONSULTASIZE);
 
-        hashSearcherTest(&h_div, insercoes, consultas, "divisao");
-        hashSearcherTest(&h_mul, insercoes, consultas, "multiplicacao");
-        hashSearcherTest(&h_improved, insercoes, consultas, "primos");
+        hashSearcherTest(&h_div, insercoes, consultas, "aberto_divisao");
+        hashSearcherTest(&h_mul, insercoes, consultas, "aberto_multiplicacao");
+        hashSearcherTest(&h_improved, insercoes, consultas, "aberto_primos");
 
         free(insercoes);
         free(consultas);
