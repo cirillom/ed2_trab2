@@ -50,18 +50,10 @@ plt.yticks(np.arange(0.05, 0.65, 0.02))
 plt.grid(which='major', axis='y')
 
 #plt.show()
-plt.savefig('out/media_e_desv_pad.png')
+plt.savefig('out/busca_linear_media_e_desv_pad.png')
 
 #fdf = pd.DataFrame(np.array([means, stds]).T)
 media_e_desv_pad_df = pd.DataFrame([means, stds], index=['Média', 'Desvio'], columns=df_names)
 media_e_desv_pad_df = media_e_desv_pad_df.round(decimals=4)
 print(media_e_desv_pad_df)
-media_e_desv_pad_df.to_csv('out/media_e_desv_pad.csv')
-
-all_values_df = pd.DataFrame()
-
-for df, name in zip(dfs, df_names):
-    all_values_df[name] = df['Tempo']
-all_values_df = all_values_df.round(decimals=4)
-print(all_values_df)
-all_values_df.to_csv('out/busca_linear_completa.csv', index=False)
+media_e_desv_pad_df.to_csv('out/busca_linear_media_e_desv_pad.csv')

@@ -31,19 +31,17 @@ int ex2b(int n_testes, string* insercao_original, string* consultas_original){
         for (int i = 0; i < INPUTSIZE; i++) {
             // inserir insercoes[i] na tabela hash
             unsigned convertedString = converter(insercoes[i]);
-            j = 0;
+            int k = 0;
             int rehashCanStop = 0;
             unsigned key = 0;
 
             while(rehashCanStop == 0){
-                key = (h_mul_closed(convertedString,j,B) + j*h_div_closed(convertedString,j,B))%B;
+                key = (h_mul_closed(convertedString,k,B) + k*h_div_closed(convertedString,k,B))%B;
                 if(hashTable[key] == NULL){
                     rehashCanStop = 1;
                 }else{
-                    if(!j){
-                        colisoes++;
-                    }
-                    j++;
+                    colisoes++;
+                    k++;
                 }
             }
 
@@ -56,22 +54,19 @@ int ex2b(int n_testes, string* insercao_original, string* consultas_original){
         _ini = inicia_tempo();
         for (int i = 0; i < CONSULTASIZE; i++) {
             unsigned convertedString = converter(consultas[i]);
-            j = 0;
+            int k = 0;
             int rehashCanStop = 0;
             unsigned key = 0;
 
             while(rehashCanStop == 0){
-                key = (h_mul_closed(convertedString,j,B) + j*h_div_closed(convertedString,j,B))%B;
+                key = (h_mul_closed(convertedString,k,B) + k*h_div_closed(convertedString,k,B))%B;
                 if(hashTable[key] == NULL){
                     rehashCanStop = 1;
                 }else if(!strcmp(hashTable[key],consultas[i])){
                     encontrados++;
                     rehashCanStop = 1;
                 }else{
-                    j++;
-                    if(j >= B){
-                        break;
-                    }
+                    k++;
                 }
             }
             // buscar consultas[i] na tabela hash

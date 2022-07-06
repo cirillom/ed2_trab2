@@ -33,19 +33,17 @@ int ex2a(int n_testes, string* insercao_original, string* consultas_original){
         clock_t _ini = inicia_tempo();
         for (int i = 0; i < INPUTSIZE; i++) {
             unsigned convertedString = converter(insercoes[i]);
-            j = 0;
+            int k = 0;
             int rehashCanStop = 0;
             unsigned key = 0;
 
             while(rehashCanStop == 0){
-                key = h_div_closed(convertedString,j,B);
+                key = h_div_closed(convertedString,k,B);
                 if(hashTable[key] == NULL){
                     rehashCanStop = 1;
                 }else{
-                    if(!j){
-                        colisoes_h_div++;
-                    }
-                    j++;
+                    colisoes_h_div++;
+                    k++;
                 }
             }
 
@@ -58,22 +56,19 @@ int ex2a(int n_testes, string* insercao_original, string* consultas_original){
         _ini = inicia_tempo();
         for (int i = 0; i < CONSULTASIZE; i++) {
             unsigned convertedString = converter(consultas[i]);
-            j = 0;
+            int k = 0;
             int rehashCanStop = 0;
             unsigned key = 0;
 
             while(rehashCanStop == 0){
-                key = h_div_closed(convertedString,j,B);
+                key = h_div_closed(convertedString,k,B);
                 if(hashTable[key] == NULL){
                     rehashCanStop = 1;
                 }else if(!strcmp(hashTable[key],consultas[i])){
                     encontrados_h_div++;
                     rehashCanStop = 1;
                 }else{
-                    j++;
-                    if(j >= B){
-                        break;
-                    }
+                    k++;
                 }
             }
             // buscar consultas[i] na tabela hash
@@ -101,19 +96,17 @@ int ex2a(int n_testes, string* insercao_original, string* consultas_original){
             // inserir insercoes[i] na tabela hash
 
             unsigned convertedString = converter(insercoes[i]);
-            j = 0;
+            int k = 0;
             int rehashCanStop = 0;
             unsigned key = 0;
 
             while(rehashCanStop == 0){
-                key = h_mul_closed(convertedString,j,B);
+                key = h_mul_closed(convertedString,k,B);
                 if(hashTable[key] == NULL){
                     rehashCanStop = 1;
                 }else{
-                    if(!j){
-                        colisoes_h_mul++;
-                    }
-                    j++;
+                    colisoes_h_mul++;
+                    k++;
                 }
             }
             hashTable[key] = malloc(sizeof(char)*20);
@@ -126,22 +119,19 @@ int ex2a(int n_testes, string* insercao_original, string* consultas_original){
         for (int i = 0; i < CONSULTASIZE; i++) {
             //buscar consultas[i] na tabela hash
             unsigned convertedString = converter(consultas[i]);
-            j = 0;
+            int k = 0;
             int rehashCanStop = 0;
             unsigned key = 0;
 
             while(rehashCanStop == 0){
-                key = h_mul_closed(convertedString,j,B);
+                key = h_mul_closed(convertedString,k,B);
                 if(hashTable[key] == NULL){
                     rehashCanStop = 1;
                 }else if(!strcmp(hashTable[key],consultas[i])){
                     encontrados_h_mul++;
                     rehashCanStop = 1;
                 }else{
-                    j++;
-                    if(j >= B){
-                        break;
-                    }
+                    k++;
                 }
             }
         }
