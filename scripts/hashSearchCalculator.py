@@ -19,14 +19,14 @@ dfs_busca_mul = [
     pd.read_csv(r'./out/busca_hash_mul_of.csv', usecols=[3])]
 
 dfs_busca_pri = [
-    pd.read_csv(r'./out/busca_hash_aberto_primos.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_aberto_primos.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_aberto_primos.csv', usecols=[3])]
+    pd.read_csv(r'./out/busca_hash_melh_of.csv', usecols=[3]),
+    pd.read_csv(r'./out/busca_hash_melh_of.csv', usecols=[3]),
+    pd.read_csv(r'./out/busca_hash_melh_of.csv', usecols=[3])]
 
 dfs_insercao_div = [
-    pd.read_csv(r'./out/busca_hash_aberto_divisao.csv', usecols=[2]),
-    pd.read_csv(r'./out/busca_hash_aberto_divisao.csv', usecols=[2]),
-    pd.read_csv(r'./out/busca_hash_aberto_divisao.csv', usecols=[2])]
+    pd.read_csv(r'./out/busca_hash_div_of.csv.csv', usecols=[2]),
+    pd.read_csv(r'./out/busca_hash_div_of.csv.csv', usecols=[2]),
+    pd.read_csv(r'./out/busca_hash_div_of.csv.csv', usecols=[2])]
 
 dfs_insercao_mul = [
     pd.read_csv(r'./out/busca_hash_aberto_multiplicacao.csv', usecols=[2]),
