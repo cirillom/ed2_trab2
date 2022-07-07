@@ -32,12 +32,12 @@ int main(){
     string* consultas_string_original = ler_strings("res/strings_busca.txt", CONSULTASIZE);
 
     printf("===Busca hashing fechado=== \n\n");
-    ex2ab(1, insercoes_string_original, consultas_string_original);
+    ex2ab(52, insercoes_string_original, consultas_string_original);
     printf("\n\n");
 
 
     printf("===Busca hashing aberto=== \n\n");
-    ex2c(1, insercoes_string_original, consultas_string_original);
+    ex2c(0, insercoes_string_original, consultas_string_original);
     printf("\n\n");
 
     for(int i = 0; i < INPUTSIZE; i++)

@@ -7,6 +7,13 @@
 #include "utils.h"
 
 int ex2ab(int n_testes, string* insercao_original, string* consultas_original){
+    
+    char id[4][20];
+    strcpy(id[0],"div_of");
+    strcpy(id[1],"mul_of");
+    strcpy(id[2],"melh_of");
+    strcpy(id[3],"duplo");
+
     for(int j = 0; j < n_testes; j++){
         printf("Busca %d: \n", j);
 
@@ -41,7 +48,11 @@ int ex2ab(int n_testes, string* insercao_original, string* consultas_original){
             // limpa a tabela hash com hash por divisão
             freeHashTable(hashTable);
 
-            if(l == 0){printf("Hash por Divisão Overflow Progressivo\t-> ");
+            string file_loc = retornarFileLoc("out/busca_hash_", id[l], ".csv");
+            generateHashSearchTimeCSV(file_loc, encontrados, colisoes, tempo_insercao, tempo_busca);
+            free(file_loc);
+
+            /*if(l == 0){printf("Hash por Divisão Overflow Progressivo\t-> ");
             }else if(l == 1){
                 printf("Hash por Multiplicação Overflow Progressivo\t-> ");
             }else if(l == 2){
@@ -53,7 +64,7 @@ int ex2ab(int n_testes, string* insercao_original, string* consultas_original){
             printf("Tempo de inserção: %fs | ", tempo_insercao);
             printf("Tempo de busca: %fs | ", tempo_busca);
             printf("Itens encontrados: %d", encontrados);
-            printf("\n\n");
+            printf("\n\n");*/
 
             free(insercoes);
             free(consultas);
