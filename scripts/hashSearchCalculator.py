@@ -9,47 +9,49 @@ from scipy import stats
 from matplotlib import style
 
 dfs_busca_div = [
-    pd.read_csv(r'./out/busca_hash_div_of.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_div_of.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_div_of.csv', usecols=[3])]
+    pd.read_csv(r'./out/busca_hash_fechado_overflow_div.csv', usecols=[3]),
+    pd.read_csv(r'./out/busca_hash_aberto_divisao.csv', usecols=[3])]
 
 dfs_busca_mul = [
-    pd.read_csv(r'./out/busca_hash_mul_of.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_mul_of.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_mul_of.csv', usecols=[3])]
+    pd.read_csv(r'./out/busca_hash_fechado_overflow_mul.csv', usecols=[3]),
+    pd.read_csv(r'./out/busca_hash_aberto_multiplicacao.csv', usecols=[3])]
 
 dfs_busca_pri = [
-    pd.read_csv(r'./out/busca_hash_melh_of.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_melh_of.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_melh_of.csv', usecols=[3])]
+    pd.read_csv(r'./out/busca_hash_fechado_overflow_primos.csv', usecols=[3]),
+    pd.read_csv(r'./out/busca_hash_aberto_primos.csv', usecols=[3])]
+
+dfs_busca_duplo = [
+    pd.read_csv(r'./out/busca_hash_fechado_duplo.csv', usecols=[3]),
+    pd.read_csv(r'./out/busca_hash_aberto_duplo.csv', usecols=[3])]
 
 dfs_insercao_div = [
-    pd.read_csv(r'./out/busca_hash_div_of.csv.csv', usecols=[2]),
-    pd.read_csv(r'./out/busca_hash_div_of.csv.csv', usecols=[2]),
-    pd.read_csv(r'./out/busca_hash_div_of.csv.csv', usecols=[2])]
+    pd.read_csv(r'./out/busca_hash_fechado_overflow_div.csv', usecols=[2]),
+    pd.read_csv(r'./out/busca_hash_aberto_divisao.csv', usecols=[2])]
 
 dfs_insercao_mul = [
-    pd.read_csv(r'./out/busca_hash_aberto_multiplicacao.csv', usecols=[2]),
-    pd.read_csv(r'./out/busca_hash_aberto_multiplicacao.csv', usecols=[2]),
+    pd.read_csv(r'./out/busca_hash_fechado_overflow_mul.csv', usecols=[2]),
     pd.read_csv(r'./out/busca_hash_aberto_multiplicacao.csv', usecols=[2])]
 
 dfs_insercao_pri = [
-    pd.read_csv(r'./out/busca_hash_aberto_primos.csv', usecols=[2]),
-    pd.read_csv(r'./out/busca_hash_aberto_primos.csv', usecols=[2]),
+    pd.read_csv(r'./out/busca_hash_fechado_overflow_primos.csv', usecols=[2]),
     pd.read_csv(r'./out/busca_hash_aberto_primos.csv', usecols=[2])]
 
-dfs_busca = [dfs_busca_div, dfs_busca_mul, dfs_busca_pri]
-dfs_insercao = [dfs_busca_div, dfs_insercao_mul, dfs_insercao_pri]
+dfs_insercao_duplo = [
+    pd.read_csv(r'./out/busca_hash_fechado_duplo.csv', usecols=[2]),
+    pd.read_csv(r'./out/busca_hash_aberto_duplo.csv', usecols=[2])]
+
+dfs_busca = [dfs_busca_div, dfs_busca_mul, dfs_busca_pri, dfs_busca_duplo]
+dfs_insercao = [dfs_busca_div, dfs_insercao_mul, dfs_insercao_pri, dfs_insercao_duplo]
 
 df_types = [
-    'Progressive Overflow',
-    'Duplo',
+    'Fechado',
     'Aberto']
 
 df_names = [
     'Divisão',
     'Multiplicação',
-    'Primo']
+    'Primo',
+    'Duplo']
 
 combined_df_names = []
 for type in df_types:
@@ -87,8 +89,8 @@ def med_dsvp(dfs, key):
 
     return medias, dsvp
 
-busca_data_points = [[0, 0], [0, 0], [0, 0]]
-insercao_data_points = [[0, 0], [0, 0], [0, 0]]
+busca_data_points = [[0, 0], [0, 0], [0, 0], [0, 0]]
+insercao_data_points = [[0, 0], [0, 0], [0, 0], [0, 0]]
 
 for i in range(len(dfs_busca)):
     busca_data_points[i][0], busca_data_points[i][1] = med_dsvp(dfs_busca[i], 'TempoBusca')
@@ -123,6 +125,8 @@ fig2, ax2 = plt.subplots()
 
 j = -width/2
 for data, name in zip(busca_data_points, df_names):
+    print(data[0])
+    print(data[1])
     ax1.errorbar(x - j, data[0], data[1], fmt = 'o', capsize=3, label=name)
     j += width/2
 
@@ -135,7 +139,7 @@ for data, name in zip(insercao_data_points, df_names):
 ax1.set_ylabel('Tempo(s)')
 ax1.set_title('Tempo de busca hash')
 ax1.set_xticks(x);ax1.set_xticklabels(df_types, minor=False)
-ax1.set_yticks(np.arange(0.000, 0.250, 0.010))
+ax1.set_yticks(np.arange(0.00, 0.78, 0.03))
 ax1.legend()
 fig1.tight_layout()
 ax1.grid(which='major', axis='y')
@@ -143,7 +147,7 @@ ax1.grid(which='major', axis='y')
 ax2.set_ylabel('Tempo(s)')
 ax2.set_title('Tempo de inserção hash')
 ax2.set_xticks(x);ax2.set_xticklabels(df_types, minor=False)
-ax2.set_yticks(np.arange(0.000, 0.09, 0.005))
+ax2.set_yticks(np.arange(0.00, 0.32, 0.01))
 ax2.legend()
 fig2.tight_layout()
 ax2.grid(which='major', axis='y')
