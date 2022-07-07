@@ -52,13 +52,95 @@ int* ler_inteiros(const char * arquivo, const int n){
     return inteiros;
 }
 
-unsigned h_div_closed(unsigned x, unsigned i, unsigned B){
-    return ((x % B) + i) % B;
+char** createHashTable(){
+    char** hashTable = malloc(sizeof(char*)*BUCKETCOUNT);
+    for (unsigned i = 0; i < BUCKETCOUNT; i++){
+            hashTable[i] = NULL;
+    }
+    return hashTable;
 }
 
-unsigned h_mul_closed(unsigned x, unsigned i, unsigned B){
+void freeHashTable(char** hashTable){
+    for (unsigned i = 0; i < BUCKETCOUNT; i++){
+            free(hashTable[i]);
+        }
+        free(hashTable);
+}
+
+unsigned h_div_closed(unsigned x, unsigned i){
+    return ((x % BUCKETCOUNT) + i) % BUCKETCOUNT;
+}
+
+unsigned h_mul_closed(unsigned x, unsigned i){
     const double A = 0.6180;
-    return  ((int) ((fmod(x * A, 1) * B) + i)) % B;
+    return  ((int) ((fmod(x * A, 1) * BUCKETCOUNT) + i)) % BUCKETCOUNT;
+}
+
+unsigned h_improved_closed(string s,int i){
+    unsigned h = 1;
+    const unsigned p1 = 189437;
+
+    for (int j = 0; s[j] != '\0'; j++){
+      h = (h * s[j] * p1)%BUCKETCOUNT;
+    }
+    h+=i;
+    return h;
+}
+
+void insertAtHashTable(char** hashTable,string* insercoes,int i,unsigned* colisoes,int helper){
+    unsigned convertedString = converter(insercoes[i]);
+    int k = 0;
+    unsigned key = 0;
+
+    while(1){
+        if(helper == 0 ){
+            key = h_div_closed(convertedString,k);
+        }else if(helper == 1){
+            key = h_mul_closed(convertedString,k);
+        }else if(helper == 2){
+            key = (h_mul_closed(convertedString,k) + k*h_div_closed(convertedString,k))%BUCKETCOUNT;
+        }else if(helper == 3){
+            key = h_improved_closed(insercoes[i],i);
+        }
+        if(hashTable[key] == NULL){
+            break;
+        }else{
+            if(k == 0){
+                (*colisoes)++;
+            }
+            k++;
+        }
+    }
+
+    hashTable[key] = malloc(sizeof(char)*20);
+    strcpy(hashTable[key],insercoes[i]);
+}
+
+int findAtHashTable(char** hashTable,string* consultas,int i,int helper){
+    unsigned convertedString = converter(consultas[i]);
+    int k = 0;
+    unsigned key = 0;
+
+    while(1){
+        if(helper == 0 ){
+            key = h_div_closed(convertedString,k);
+        }else if(helper == 1){
+            key = h_mul_closed(convertedString,k);
+        }else if(helper == 2){
+            key = (h_mul_closed(convertedString,k) + k*h_div_closed(convertedString,k))%BUCKETCOUNT;
+        }else if(helper == 3){
+            key = h_improved_closed(consultas[i],i);
+        }
+
+        if(hashTable[key] == NULL){
+            return 0;
+        }else if(!strcmp(hashTable[key],consultas[i])){
+            return 1;
+        }else{
+            k++;
+        }
+    }
+
 }
 
 int* duplicarArray(int* arr, int n){

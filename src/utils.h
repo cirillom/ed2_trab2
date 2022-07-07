@@ -3,6 +3,7 @@
 
 #define INPUTSIZE 50000
 #define CONSULTASIZE 70000
+#define BUCKETCOUNT 150001
 
 // Definição do tipo booleano
 typedef unsigned char bool;
@@ -18,9 +19,17 @@ unsigned converterBetter(string s);
 
 string* ler_strings(const char * arquivo, const int n);
 
-unsigned h_div_closed(unsigned x, unsigned i, unsigned B);
+char** createHashTable();
 
-unsigned h_mul_closed(unsigned x, unsigned i, unsigned B);
+void freeHashTable(char** hashTable);
+
+unsigned h_div_closed(unsigned x, unsigned i);
+
+unsigned h_mul_closed(unsigned x, unsigned i);
+
+void insertAtHashTable(char** hashTable,string* insercoes,int i,unsigned* colisoes,int helper);
+
+int findAtHashTable(char** hashTable,string* consultas,int i,int helper);
 
 int* ler_inteiros(const char * arquivo, const int n);
 
