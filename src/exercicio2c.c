@@ -29,6 +29,10 @@ unsigned h_improved(string s, unsigned B) {
    return h;
 }
 
+unsigned h_duplo(string s,unsigned B){
+    return (h_mul(s, B) + h_div(s, B))%B;
+}
+
 void printHashTable(Node **hash_table, string file_id){
     string file_start = "build/hash_table_";
     string file_extension = ".txt";
@@ -113,6 +117,7 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         hashTester(&h_div, insercoes, consultas, "aberto_divisao");
         hashTester(&h_mul, insercoes, consultas, "aberto_multiplicacao");
         hashTester(&h_improved, insercoes, consultas, "aberto_primos");
+        hashTester(&h_duplo, insercoes, consultas, "aberto_duplo");
 
         free(insercoes);
         free(consultas);

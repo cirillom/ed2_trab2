@@ -44,7 +44,7 @@ unsigned h_improved_closed(string s,unsigned int i){
     return h;
 }
 
-unsigned h_duplo(string s,unsigned int i){
+unsigned h_duplo_closed(string s,unsigned int i){
     return ((h_mul_closed(s,i) + i*h_div_closed(s,i))%BUCKETCOUNT);
 }
 
@@ -135,7 +135,7 @@ int ex2ab(int n_testes, string* insercao_original, string* consultas_original){
         core(&h_div_closed,insercoes,consultas,"fechado_overflow_div");
         core(&h_mul_closed,insercoes,consultas,"fechado_overflow_mul");
         core(&h_improved_closed,insercoes,consultas,"fechado_overflow_primo");
-        core(&h_duplo,insercoes,consultas,"fechado_duplo");
+        core(&h_duplo_closed,insercoes,consultas,"fechado_duplo");
 
         free(insercoes);
         free(consultas);
