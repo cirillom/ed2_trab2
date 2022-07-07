@@ -121,7 +121,7 @@ void core(unsigned(*hash_function)(string,unsigned),string* insercoes,string* co
     printf("Tempo de inserção: %fs | ", tempo_insercao);
     printf("Tempo de busca: %fs | ", tempo_busca);
     printf("Itens encontrados: %d", encontrados);
-    printf("\n\n");
+    printf("\n");
     
 }
 

@@ -70,7 +70,6 @@ int buscaSequencialIndice(int* entradas,int* consultas,numberTable* table,int wo
 }
 
 int ex1d(int n_testes, int* entradas_original, int* consultas_original){
-    remove("");
     for(int j = 0; j < n_testes; j++){
         unsigned encontrados = 0;
 

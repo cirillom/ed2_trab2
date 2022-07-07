@@ -24,7 +24,6 @@ int buscaSequencialMoverFrente(int* arr, int n, int x){
 }
 
 int ex1b(int n_testes, int* entradas_original, int* consultas_original){
-    remove("");
     for(int j = 0; j < n_testes; j++){
         unsigned encontrados = 0;
         int* entradas = duplicarArray(entradas_original, INPUTSIZE);

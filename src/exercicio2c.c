@@ -48,7 +48,7 @@ void printHashTable(Node **hash_table, string file_id){
     free(file_loc);
 }
 
-void hashSearcherTest(unsigned (*hash_function)(string, unsigned), string* insercoes, string* consultas, string id){
+void hashTester(unsigned (*hash_function)(string, unsigned), string* insercoes, string* consultas, string id){
     const unsigned B = 150001;
     unsigned encontrados = 0;
     unsigned colisoes = 0;
@@ -110,9 +110,9 @@ int ex2c(int n_testes, string* insercao_original, string* consultas_original){
         string* insercoes = duplicarString(insercao_original, INPUTSIZE);
         string* consultas = duplicarString(consultas_original, CONSULTASIZE);
 
-        hashSearcherTest(&h_div, insercoes, consultas, "aberto_divisao");
-        hashSearcherTest(&h_mul, insercoes, consultas, "aberto_multiplicacao");
-        hashSearcherTest(&h_improved, insercoes, consultas, "aberto_primos");
+        hashTester(&h_div, insercoes, consultas, "aberto_divisao");
+        hashTester(&h_mul, insercoes, consultas, "aberto_multiplicacao");
+        hashTester(&h_improved, insercoes, consultas, "aberto_primos");
 
         free(insercoes);
         free(consultas);
