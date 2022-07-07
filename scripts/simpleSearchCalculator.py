@@ -45,8 +45,8 @@ for df in dfs:
 
 plt.errorbar(df_names, means, stds, linestyle='None', marker='o', capsize=3)
 plt.ylabel('Tempo (s)')
-plt.xlabel('Busca Linear')
-plt.yticks(np.arange(0.05, 0.65, 0.02))
+plt.title('Busca Linear')
+plt.yticks(np.arange(0.00, 5.8, 0.3))
 plt.grid(which='major', axis='y')
 
 #plt.show()
