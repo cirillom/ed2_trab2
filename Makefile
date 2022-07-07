@@ -1,6 +1,6 @@
 
 CC ?= gcc
-CFLAGS += -O3 -Wall -Wextra -Wpedantic
+CFLAGS += -Wall -Wextra -Wpedantic
 LDFLAGS += -lm
 VDFLAGS += --leak-check=full --show-leak-kinds=all -s
 
