@@ -105,7 +105,7 @@ void insertAtHashTable(char** hashTable,string* insercoes,int i,unsigned* coliso
         if(hashTable[key] == NULL){
             break;
         }else{
-            if(k == 0){
+            if(!k){
                 (*colisoes)++;
             }
             k++;

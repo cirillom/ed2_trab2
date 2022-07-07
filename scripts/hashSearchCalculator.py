@@ -9,14 +9,14 @@ from scipy import stats
 from matplotlib import style
 
 dfs_busca_div = [
-    pd.read_csv(r'./out/busca_hash_aberto_divisao.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_aberto_divisao.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_aberto_divisao.csv', usecols=[3])]
+    pd.read_csv(r'./out/busca_hash_div_of.csv', usecols=[3]),
+    pd.read_csv(r'./out/busca_hash_div_of.csv', usecols=[3]),
+    pd.read_csv(r'./out/busca_hash_div_of.csv', usecols=[3])]
 
 dfs_busca_mul = [
-    pd.read_csv(r'./out/busca_hash_aberto_multiplicacao.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_aberto_multiplicacao.csv', usecols=[3]),
-    pd.read_csv(r'./out/busca_hash_aberto_multiplicacao.csv', usecols=[3])]
+    pd.read_csv(r'./out/busca_hash_mul_of.csv', usecols=[3]),
+    pd.read_csv(r'./out/busca_hash_mul_of.csv', usecols=[3]),
+    pd.read_csv(r'./out/busca_hash_mul_of.csv', usecols=[3])]
 
 dfs_busca_pri = [
     pd.read_csv(r'./out/busca_hash_aberto_primos.csv', usecols=[3]),

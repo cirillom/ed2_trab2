@@ -52,7 +52,7 @@ int ex2ab(int n_testes, string* insercao_original, string* consultas_original){
             generateHashSearchTimeCSV(file_loc, encontrados, colisoes, tempo_insercao, tempo_busca);
             free(file_loc);
 
-            /*if(l == 0){printf("Hash por Divisão Overflow Progressivo\t-> ");
+            if(l == 0){printf("Hash por Divisão Overflow Progressivo\t-> ");
             }else if(l == 1){
                 printf("Hash por Multiplicação Overflow Progressivo\t-> ");
             }else if(l == 2){
@@ -64,7 +64,7 @@ int ex2ab(int n_testes, string* insercao_original, string* consultas_original){
             printf("Tempo de inserção: %fs | ", tempo_insercao);
             printf("Tempo de busca: %fs | ", tempo_busca);
             printf("Itens encontrados: %d", encontrados);
-            printf("\n\n");*/
+            printf("\n\n");
 
             free(insercoes);
             free(consultas);
