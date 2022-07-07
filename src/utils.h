@@ -27,6 +27,8 @@ unsigned h_div_closed(unsigned x, unsigned i);
 
 unsigned h_mul_closed(unsigned x, unsigned i);
 
+unsigned h_improved_closed(string s,int i);
+
 void insertAtHashTable(char** hashTable,string* insercoes,int i,unsigned* colisoes,int helper);
 
 int findAtHashTable(char** hashTable,string* consultas,int i,int helper);

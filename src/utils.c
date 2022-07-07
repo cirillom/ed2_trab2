@@ -72,6 +72,7 @@ unsigned h_div_closed(unsigned x, unsigned i){
 }
 
 unsigned h_mul_closed(unsigned x, unsigned i){
+    
     const double A = 0.6180;
     return  ((int) ((fmod(x * A, 1) * BUCKETCOUNT) + i)) % BUCKETCOUNT;
 }
@@ -81,9 +82,8 @@ unsigned h_improved_closed(string s,int i){
     const unsigned p1 = 189437;
 
     for (int j = 0; s[j] != '\0'; j++){
-      h = (h * s[j] * p1)%BUCKETCOUNT;
+      h = ((h * s[j] * p1)%BUCKETCOUNT + i)%BUCKETCOUNT;
     }
-    h+=i;
     return h;
 }
 
@@ -98,9 +98,9 @@ void insertAtHashTable(char** hashTable,string* insercoes,int i,unsigned* coliso
         }else if(helper == 1){
             key = h_mul_closed(convertedString,k);
         }else if(helper == 2){
-            key = (h_mul_closed(convertedString,k) + k*h_div_closed(convertedString,k))%BUCKETCOUNT;
+            key = h_improved_closed(insercoes[i],k);
         }else if(helper == 3){
-            key = h_improved_closed(insercoes[i],i);
+            key = (h_mul_closed(convertedString,k) + k*h_div_closed(convertedString,k))%BUCKETCOUNT;
         }
         if(hashTable[key] == NULL){
             break;
@@ -127,9 +127,9 @@ int findAtHashTable(char** hashTable,string* consultas,int i,int helper){
         }else if(helper == 1){
             key = h_mul_closed(convertedString,k);
         }else if(helper == 2){
-            key = (h_mul_closed(convertedString,k) + k*h_div_closed(convertedString,k))%BUCKETCOUNT;
+            key = h_improved_closed(consultas[i],k);
         }else if(helper == 3){
-            key = h_improved_closed(consultas[i],i);
+            key = (h_mul_closed(convertedString,k) + k*h_div_closed(convertedString,k))%BUCKETCOUNT;
         }
 
         if(hashTable[key] == NULL){

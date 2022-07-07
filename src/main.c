@@ -31,13 +31,10 @@ int main(){
     string* insercoes_string_original = ler_strings("res/strings_entrada.txt", INPUTSIZE);
     string* consultas_string_original = ler_strings("res/strings_busca.txt", CONSULTASIZE);
 
-    printf("===Busca hashing overflow progressivo=== \n\n");
-    ex2a(1, insercoes_string_original, consultas_string_original);
+    printf("===Busca hashing fechado=== \n\n");
+    ex2ab(1, insercoes_string_original, consultas_string_original);
     printf("\n\n");
 
-    printf("===Busca hashing hash duplo=== \n\n");
-    ex2b(1, insercoes_string_original, consultas_string_original);
-    printf("\n\n");
 
     printf("===Busca hashing aberto=== \n\n");
     ex2c(1, insercoes_string_original, consultas_string_original);

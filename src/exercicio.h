@@ -6,8 +6,7 @@ int ex1b(int n_testes, int* entradas, int* consultas);
 int ex1c(int n_testes, int* entradas, int* consultas);
 int ex1d(int n_testes, int* entradas, int* consultas);
 
-int ex2a();
-int ex2b();
-int ex2c();
+int ex2ab(int n_testes, string* insercao_original, string* consultas_original);
+int ex2c(int n_testes, string* insercao_original, string* consultas_original);
 
 #endif
