@@ -134,7 +134,7 @@ int ex2ab(int n_testes, string* insercao_original, string* consultas_original){
 
         core(&h_div_closed,insercoes,consultas,"fechado_overflow_div");
         core(&h_mul_closed,insercoes,consultas,"fechado_overflow_mul");
-        core(&h_improved_closed,insercoes,consultas,"fechado_overflow_primo");
+        core(&h_improved_closed,insercoes,consultas,"fechado_overflow_primos");
         core(&h_duplo_closed,insercoes,consultas,"fechado_duplo");
 
         free(insercoes);

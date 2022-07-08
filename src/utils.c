@@ -6,7 +6,7 @@
 
 #include "utils.h"
 
-int checkIfFileExists(const char* filename){
+int checkIfFileExists(const char* filename){ //verifica a existência de um arquivo na memoria
     struct stat buffer;
     int exist = stat(filename,&buffer);
     if(exist == 0)
@@ -54,7 +54,7 @@ int* ler_inteiros(const char * arquivo, const int n){
 
 int* duplicarArray(int* arr, int n){
     int* novo = (int *) malloc(sizeof(int) * n);
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++) //para cada elemento do array, copia para o novo array
         novo[i] = arr[i];
     
     return novo;    
@@ -62,14 +62,14 @@ int* duplicarArray(int* arr, int n){
 
 string* duplicarString(string* arr, int n){
     string* novo = (string *) malloc(sizeof(string) * n);
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)//para cada elemento do array, copia para o novo array
         novo[i] = arr[i];
     
     return novo;    
 }
 
 void generateSimpleSearchTimeCSV(string file_loc, double tempo_busca, int encontrados){
-        if(!checkIfFileExists(file_loc)){
+        if(!checkIfFileExists(file_loc)){ //se o arquivo não existir cria o header
             FILE* fp = fopen(file_loc, "w");
             fprintf(fp, "Encontrados,Tempo\n");
             fclose(fp);
@@ -81,7 +81,7 @@ void generateSimpleSearchTimeCSV(string file_loc, double tempo_busca, int encont
 }
 
 void generateHashSearchTimeCSV(string file_loc, int encontrados, int colisoes, double tempo_insercao, double tempo_busca){
-        if(!checkIfFileExists(file_loc)){
+        if(!checkIfFileExists(file_loc)){//se o arquivo não existir cria o header
             FILE* fp = fopen(file_loc, "w");
             fprintf(fp, "Encontrados,Colisoes,TempoInsercao,TempoBusca\n");
             fclose(fp);

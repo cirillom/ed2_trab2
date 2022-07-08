@@ -7,7 +7,7 @@
 
 void moverParaFrente(int* arr, int index){
     int value = arr[index];
-    for (int i = index; i > 0; i--)
+    for (int i = index; i > 0; i--) //iniciando no index que queremos, vai até 0 mudando cada elemento 1 posição para frente
         arr[i] = arr[i-1];
 
     arr[0] = value;
@@ -15,17 +15,19 @@ void moverParaFrente(int* arr, int index){
 
 int buscaSequencialMoverFrente(int* arr, int n, int x){
     int i;
-    for (i = 0; i < n; i++)
+    for (i = 0; i < n; i++) //loop por cada elemento do array a ser buscado
         if (arr[i] == x){
-            moverParaFrente(arr, i);
+            moverParaFrente(arr, i); //caso ache o elemento, passa a posição dele para o algoritmo de mover para frente
             return TRUE;
         }
     return FALSE;
 }
 
 int ex1b(int n_testes, int* entradas_original, int* consultas_original){
-    for(int j = 0; j < n_testes; j++){
+    for(int j = 0; j < n_testes; j++){ //faz o número de testes pedidos
         unsigned encontrados = 0;
+
+        //duplica o array orginal para não altera-lo
         int* entradas = duplicarArray(entradas_original, INPUTSIZE);
         int* consultas = duplicarArray(consultas_original, INPUTSIZE);
 

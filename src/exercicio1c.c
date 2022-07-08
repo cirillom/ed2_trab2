@@ -6,7 +6,7 @@
 #include "utils.h"
 
 int trocar(int* arr, int i1, int i2){
-    if(i1 < 0 || i2<0)
+    if(i1 < 0 || i2<0) // os indices precisam ser maior que 0 para que não haja inversão do primeiro elemento com o elemento -1
         return FALSE;
 
     int temp = arr[i1];
@@ -17,17 +17,19 @@ int trocar(int* arr, int i1, int i2){
 
 int buscaSequencialTransposicao(int* arr, int n, int x){
     int i;
-    for (i = 0; i < n; i++)
+    for (i = 0; i < n; i++)//loop por cada elemento do array a ser buscado
         if (arr[i] == x){
-            trocar(arr, i, i-1);
+            trocar(arr, i, i-1); //caso ache o elemento inverte ele com o elemento da posição anterior
             return TRUE;
         }
     return FALSE;
 }
 
 int ex1c(int n_testes, int* entradas_original, int* consultas_original){
-    for(int j = 0; j < n_testes; j++){
+    for(int j = 0; j < n_testes; j++){ //faz o número de testes pedidos
         unsigned encontrados = 0;
+
+        //duplica o array orginal para não altera-lo
         int* entradas = duplicarArray(entradas_original, INPUTSIZE);
         int* consultas = duplicarArray(consultas_original, INPUTSIZE);
         printf("Busca %d: \n", j);
