@@ -95,17 +95,18 @@ insercao_data_points = [[0, 0], [0, 0], [0, 0], [0, 0]]
 for i in range(len(dfs_busca)):
     busca_data_points[i][0], busca_data_points[i][1] = med_dsvp(dfs_busca[i], 'TempoBusca')
 
+for i in range(len(busca_data_points)):
+    print(busca_data_points[i])
+
 for i in range(len(dfs_insercao)):
     insercao_data_points[i][0], insercao_data_points[i][1] = med_dsvp(dfs_insercao[i], 'TempoInsercao')
 
-
 def GerarMediaCSV(data_points, type):
     media = []; dsvp = []
-    for data in data_points:
-        for i in data[0]:
-            media.append(i)
-        for i in data[1]:
-            dsvp.append(i)
+    for i in range(2):
+        for data in data_points:
+            media.append(data[0][i])
+            dsvp.append(data[1][i])
 
     media_dsvp_df = pd.DataFrame([media, dsvp], index=['Média', 'Desvio'], columns=combined_df_names)
     media_dsvp_df = media_dsvp_df.round(decimals=4)
@@ -123,16 +124,21 @@ width = 0.3
 fig1, ax1 = plt.subplots()
 fig2, ax2 = plt.subplots()
 
+
+j = 0
+
 j = -width/2
-for data, name in zip(busca_data_points, df_names):
-    print(data[0])
-    print(data[1])
-    ax1.errorbar(x - j, data[0], data[1], fmt = 'o', capsize=3, label=name)
+for data, name in zip(busca_data_points, 2 * df_names):
+    media_arr = [data[0][0], data[0][1]]
+    dsvp_arr = [data[1][0], data[1][1]]
+    ax1.errorbar(x - j, media_arr, yerr=dsvp_arr, fmt = 'o', capsize=3, label=name)
     j += width/2
 
 j = -width/2
 for data, name in zip(insercao_data_points, df_names):
-    ax2.errorbar(x - j, data[0], data[1], fmt = 'o', capsize=3, label=name)
+    media_arr = [data[0][0], data[0][1]]
+    dsvp_arr = [data[1][0], data[1][1]]
+    ax2.errorbar(x - j, media_arr, yerr=dsvp_arr, fmt = 'o', capsize=3, label=name)
     j += width/2
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
