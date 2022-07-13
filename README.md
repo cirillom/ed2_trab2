@@ -3,13 +3,14 @@
 ## Este trabalho foi desenvolvido por
 
  - Gustavo M. Scarenci C. Ferreira - N°USP: 12547792
+ - Hugo Hiroyuki Nakamura - N°USP: 12732037
  - Matheus Henrique Dias Cirillo - N°USP: 12547750
 
 
 ## Informações sobre o projeto
 
 ### Documentação/Relatório
-O relatório estáno arquivo 12547750_12547792.pdf, os arquivos de entrada e saída estão em res/ e o código em si em src/
+O relatório estáno arquivo 12547792_12732037_12547750.pdf, os arquivos de entrada e saída estão em res/ e o código em si em src/
 
 ### Como Compilar o Código
 Utilize `make` para compilar o programa e `make run` para iniciá-lo, caso seja necessário passar argumentos de linha de comando para o programa, utilize `make run ARGS="seus argumentos"`
